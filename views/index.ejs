@@ -7,17 +7,25 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		alert("Hi")
-
+		$('form').submit(function(){
+			if($('.myname').val().length < 1 || $(".myquote").val().length < 1){
+				alert("All fields in quote form must be filled out!")
+				return false
+			}		
+		})
 	})
 	</script>
 </head>
 <body>
-	<h1>Hi</h1>
-	<h3>Add a Quote!</h3>
+	<h1>Welcome to QuotingDojo</h1>
 	<form action='/quotes' method='post'>
-	Your Name: <input type='text' name='name'>
-	Your Quote: <input type='text' name='quote'>
-	<input type='submit' value='Submit'>
+	<p>Your Name:</p> <input class="myname"type='text' name='name'>
+	<br>
+	<p>Your Quote:</p> <textarea class="myquote" name="quote" cols="80" rows="20"></textarea>
+	<br><br>
+	<input class="submitting" type='submit' value='Add my quote!'>
+	<a href="#">Skip to Quotes</a>
 	 </form>
+	 
 </body>
 </html>
