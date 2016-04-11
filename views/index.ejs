@@ -6,7 +6,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
-		alert("Hi")
+		// alert("Hi")
 		$('form').submit(function(){
 			if($('.myname').val().length < 1 || $(".myquote").val().length < 1){
 				alert("All fields in quote form must be filled out!")
@@ -24,7 +24,7 @@
 	<p>Your Quote:</p> <textarea class="myquote" name="quote" cols="80" rows="20"></textarea>
 	<br><br>
 	<input class="submitting" type='submit' value='Add my quote!'>
-	<a href="#">Skip to Quotes</a>
+	<a href="/allQuotes">Skip to Quotes</a>
 	 </form>
 	 
 </body>

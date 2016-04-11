@@ -40,3 +40,18 @@ a {
 	color: white;
 	margin-right: 250px;
 }
+
+#allthequotes {
+	position: absolute;
+	left: 10%;
+	width: 70%;
+}
+
+h4 {
+	margin-left: 50px;
+}
+
+span a {
+	background-color: none;
+	float: right;
+}

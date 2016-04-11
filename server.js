@@ -48,9 +48,26 @@ app.post('/quotes', function(req, res) {
 		}
 		else{
 			console.log("Successfully added a quote");
-			res.redirect("/")
+			res.redirect("/allQuotes")
 		}
 	})
+})
+
+app.get('/allQuotes', function(req, res) {
+	Quote.find({}, function(err, quotes){
+    	// find all users in db
+    	if(err){
+    		console.log("no user in database")
+    	}
+    	else {
+    		for( i in quotes){
+    			console.log(quotes[i].name)
+    			console.log(quotes[i].quote)
+    			console.log(quotes[i].date)
+    		}
+    		res.render('quotes', {quotes: quotes})
+    	}
+    })
 })
 
 

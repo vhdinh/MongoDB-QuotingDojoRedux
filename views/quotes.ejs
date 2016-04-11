@@ -1,0 +1,23 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Quotes</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+
+	})
+	</script>
+</head>
+<body>
+	<div id="allthequotes">
+	<h1>Here are the awesome quotes!!!<span><a href="/">Back to QuotingDojo</a></span></h1>
+	    <% for (var x in quotes) { %>
+        <h3> " <%= quotes[x].quote %> " </h3>
+        <h4> - <%= quotes[x].name %> at <%= quotes[x].date%></h4>
+        <hr>
+    	<% } %>
+	</div>
+</body>
+</html>
