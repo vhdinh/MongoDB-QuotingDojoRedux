@@ -4,18 +4,6 @@ var path = require("path");
 var app = express();
 var mongoose = require('mongoose');
 
-// connect mongodb database wusing mongoose - basic_mongoose is name of our db in mongodb - this name should match name of db we are using for project
-mongoose.connect('mongodb://localhost/quote_dojo');
-
-var UserSchema = new mongoose.Schema({
-	name: String,
-	quote: String,
-	date: Date
-})
-
-mongoose.model('Quote', UserSchema); //setting this Schema in our Models as "User"
-var Quote = mongoose.model('Quote') // retrieve this Schema from our Models named "User"
-
 
 // Require body-parser (to receive post data from clients)
 var bodyParser = require("body-parser");
@@ -24,51 +12,21 @@ app.use(bodyParser.urlencoded());
 
 
 // Setting up static folder directory
-app.use(express.static(path.join(__dirname, "./static")));
+app.use(express.static(path.join(__dirname, "./client/static")));
 
 // Setting up views folder directory
-app.set("views", path.join(__dirname, "./views"));
+app.set("views", path.join(__dirname, "./client/views"));
 
 // Setting view engine set to EJS
 app.set("view engine", "ejs");
 
-// routes
-// root request
-app.get("/", function(req, res) {
-	res.render("index");
-})
+// require mongoose configuration file which doe the rest
+require('./server/config/mongoose.js');
 
-app.post('/quotes', function(req, res) {
-	console.log("POST DATA", req.body)
-	var quote = new Quote({name: req.body.name, quote: req.body.quote, date: Date()})
-	// console.log("QUOTEEE ", quote)
-	quote.save(function(err) {
-		if(err){
-			console.log("Something went wrong!!!")
-		}
-		else{
-			console.log("Successfully added a quote");
-			res.redirect("/allQuotes")
-		}
-	})
-})
-
-app.get('/allQuotes', function(req, res) {
-	Quote.find({}, function(err, quotes){
-    	// find all users in db
-    	if(err){
-    		console.log("no user in database")
-    	}
-    	else {
-    		for( i in quotes){
-    			console.log(quotes[i].name)
-    			console.log(quotes[i].quote)
-    			console.log(quotes[i].date)
-    		}
-    		res.render('quotes', {quotes: quotes})
-    	}
-    })
-})
+// store the function in a variable
+var routes_setter = require("./server/config/routes.js");
+// invoke funciton stored in routes_setter and pass it to the "app" variable
+routes_setter(app);
 
 
 // Setting our server to listen to port 8000
